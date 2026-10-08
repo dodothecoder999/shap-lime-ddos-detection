@@ -29,16 +29,12 @@ The analysis used the same **2,000 sampled test flows** for SHAP and LIME. The a
 
 ## Technologies
 
-- Python
-- XGBoost
-- SHAP
-- LIME
-- Pandas
-- NumPy
-- Scikit-learn
-- Flask
+- Python                     - NumPy
+- XGBoost                    - Scikit-learn
+- SHAP                       - Flask
+- LIME                       - Flask-CORS
+- Pandas                     - HTML / CSS / JavaScript
 - Flask-CORS
-- HTML / CSS / JavaScript
 
 ## Dataset
 
@@ -79,7 +75,7 @@ shap-lime-ddos-detection/
 └── .gitignore
 ```
 
-> The dataset is kept locally and is not uploaded to GitHub.
+> The dataset is kept locally 
 
 ## Run Locally in VS Code
 
@@ -146,6 +142,5 @@ This repository accompanies the research paper:
 
 ## Notes
 
-- Do not upload the CIC-DDoS2019 dataset to this repository.
 - Do not upload virtual environments, cache files, or other large generated files.
 - Make sure the Flask backend is running before opening the connected dashboard.

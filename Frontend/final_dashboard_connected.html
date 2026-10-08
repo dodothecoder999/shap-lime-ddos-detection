@@ -1,0 +1,4503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>XAI-Cyber Analytics</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy-dark: #0d2748;
+            --navy: #173b68;
+            --navy-light: #245487;
+
+            --blue: #3184df;
+            --blue-light: #eaf4ff;
+
+            --purple: #8768dd;
+            --purple-light: #f1edff;
+
+            --green: #10a874;
+            --green-light: #ebfaf5;
+
+            --red: #df6470;
+            --red-light: #fff0f2;
+
+            --background: #f3f7fb;
+            --white: #ffffff;
+
+            --text: #15385f;
+            --muted: #6d8098;
+
+            --border: #dbe5ef;
+
+            --shadow:
+                0 3px 12px rgba(20, 55, 90, 0.07);
+        }
+
+
+        body {
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            background: var(--background);
+            color: var(--text);
+        }
+
+
+        button,
+        input,
+        select {
+            font-family: inherit;
+        }
+
+
+        button {
+            cursor: pointer;
+        }
+
+
+        /* =========================================================
+           LOGIN PAGE
+        ========================================================= */
+
+        #loginPage {
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                radial-gradient(
+                    circle at 20% 20%,
+                    rgba(49,132,223,0.12),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 80% 80%,
+                    rgba(135,104,221,0.10),
+                    transparent 35%
+                ),
+                #eef4fa;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+
+        .login-decoration {
+
+            position: absolute;
+
+            border-radius: 50%;
+
+            border:
+                1px solid rgba(49,132,223,0.08);
+
+            pointer-events: none;
+        }
+
+
+        .decoration-one {
+
+            width: 430px;
+            height: 430px;
+
+            left: -180px;
+            top: -180px;
+        }
+
+
+        .decoration-two {
+
+            width: 500px;
+            height: 500px;
+
+            right: -220px;
+            bottom: -220px;
+        }
+
+
+        .login-container {
+
+            width: 430px;
+
+            max-width: calc(100% - 35px);
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        .login-brand {
+
+            text-align: center;
+
+            margin-bottom: 22px;
+        }
+
+
+        .login-brand-title {
+
+            font-size: 28px;
+
+            font-weight: 800;
+
+            letter-spacing: 0.5px;
+
+            color: var(--navy-dark);
+        }
+
+
+        .login-brand-subtitle {
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            letter-spacing: 4px;
+
+            color: var(--blue);
+
+            margin-top: 4px;
+        }
+
+
+        .login-brand-line {
+
+            width: 45px;
+
+            height: 3px;
+
+            border-radius: 10px;
+
+            background: var(--blue);
+
+            margin: 12px auto 0;
+        }
+
+
+        .login-card {
+
+            background: white;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 12px;
+
+            padding: 34px;
+
+            box-shadow:
+                0 20px 55px rgba(22,55,90,0.13);
+        }
+
+
+        .login-heading {
+
+            text-align: center;
+
+            margin-bottom: 28px;
+        }
+
+
+        .login-heading h1 {
+
+            font-size: 22px;
+
+            color: var(--text);
+
+            margin-bottom: 6px;
+        }
+
+
+        .login-heading p {
+
+            font-size: 12px;
+
+            color: var(--muted);
+        }
+
+
+        .form-group {
+
+            margin-bottom: 17px;
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            color: #4f6680;
+
+            margin-bottom: 7px;
+        }
+
+
+        .input-wrapper {
+
+            position: relative;
+        }
+
+
+        .input-icon {
+
+            position: absolute;
+
+            left: 13px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #8a9bb0;
+
+            font-size: 14px;
+
+            pointer-events: none;
+        }
+
+
+        .login-input {
+
+            width: 100%;
+
+            height: 45px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 7px;
+
+            padding:
+                0 13px 0 39px;
+
+            outline: none;
+
+            color: var(--text);
+
+            font-size: 13px;
+
+            background: #fbfdff;
+
+            transition:
+                border 0.2s,
+                box-shadow 0.2s;
+        }
+
+
+        .login-input:focus {
+
+            border-color: var(--blue);
+
+            background: white;
+
+            box-shadow:
+                0 0 0 3px rgba(49,132,223,0.10);
+        }
+
+
+        .password-toggle {
+
+            position: absolute;
+
+            right: 11px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+
+            background: transparent;
+
+            color: #7e90a6;
+
+            font-size: 12px;
+
+            padding: 5px;
+        }
+
+
+        .login-options {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin: 5px 0 20px;
+        }
+
+
+        .remember {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color: #6c7f96;
+
+            font-size: 11px;
+        }
+
+
+        .remember input {
+
+            accent-color: var(--blue);
+        }
+
+
+        .forgot {
+
+            border: none;
+
+            background: transparent;
+
+            color: var(--blue);
+
+            font-size: 11px;
+
+            font-weight: 600;
+        }
+
+
+        .login-button {
+
+            width: 100%;
+
+            height: 45px;
+
+            border: none;
+
+            border-radius: 7px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #3184df,
+                    #286fbd
+                );
+
+            color: white;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            box-shadow:
+                0 5px 14px rgba(49,132,223,0.20);
+
+            transition:
+                transform 0.15s,
+                box-shadow 0.15s;
+        }
+
+
+        .login-button:hover {
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 8px 18px rgba(49,132,223,0.27);
+        }
+
+
+        .login-button:active {
+
+            transform: translateY(0);
+        }
+
+
+        .login-error {
+
+            display: none;
+
+            background: #fff0f2;
+
+            border:
+                1px solid #f3cbd1;
+
+            color: #bd4653;
+
+            border-radius: 6px;
+
+            padding: 9px 11px;
+
+            font-size: 11px;
+
+            margin-bottom: 15px;
+
+            text-align: center;
+        }
+
+
+        .login-demo {
+
+            margin-top: 19px;
+
+            padding-top: 16px;
+
+            border-top:
+                1px solid #edf1f5;
+
+            text-align: center;
+
+            color: #8a99ab;
+
+            font-size: 10px;
+
+            line-height: 1.6;
+        }
+
+
+        .login-demo strong {
+
+            color: #62758d;
+        }
+
+
+        .login-footer {
+
+            text-align: center;
+
+            margin-top: 16px;
+
+            color: #8a99ab;
+
+            font-size: 10px;
+        }
+
+
+        /* =========================================================
+           DASHBOARD
+        ========================================================= */
+
+        #dashboardApp {
+            display: none;
+        }
+
+
+        .sidebar {
+
+            position: fixed;
+
+            left: 0;
+            top: 0;
+
+            width: 225px;
+            height: 100vh;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #173b68 0%,
+                    #102f58 100%
+                );
+
+            color: white;
+
+            padding: 25px 14px;
+
+            z-index: 100;
+        }
+
+
+        .logo {
+            padding: 3px 14px 30px;
+        }
+
+
+        .logo-title {
+
+            font-size: 21px;
+
+            font-weight: 800;
+
+            letter-spacing: 0.8px;
+        }
+
+
+        .logo-subtitle {
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            letter-spacing: 3px;
+
+            margin-top: 3px;
+
+            opacity: 0.75;
+        }
+
+
+        .logo-line {
+
+            height: 2px;
+
+            width: 42px;
+
+            background: #4d9cf0;
+
+            margin-top: 12px;
+
+            border-radius: 10px;
+        }
+
+
+        .navigation {
+            margin-top: 5px;
+        }
+
+
+        .nav-item {
+
+            width: 100%;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            border: none;
+
+            background: transparent;
+
+            color: rgba(255,255,255,0.82);
+
+            padding: 12px 14px;
+
+            margin: 5px 0;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+
+            text-align: left;
+
+            transition:
+                background 0.2s,
+                color 0.2s,
+                transform 0.2s;
+        }
+
+
+        .nav-item:hover {
+
+            background: rgba(255,255,255,0.08);
+
+            color: white;
+
+            transform: translateX(2px);
+        }
+
+
+        .nav-item.active {
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #3787df,
+                    #2d75c6
+                );
+
+            color: white;
+
+            box-shadow:
+                0 4px 12px rgba(0,0,0,0.14);
+        }
+
+
+        .nav-icon {
+
+            width: 20px;
+
+            text-align: center;
+
+            font-size: 16px;
+        }
+
+
+        .sidebar-status {
+
+            position: absolute;
+
+            left: 14px;
+            right: 14px;
+
+            bottom: 25px;
+
+            border-top:
+                1px solid rgba(255,255,255,0.18);
+
+            padding: 17px 9px 0;
+        }
+
+
+        .status-title {
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.8px;
+
+            opacity: 0.7;
+
+            margin-bottom: 11px;
+        }
+
+
+        .status-row {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            font-size: 12px;
+        }
+
+
+        .status-dot {
+
+            width: 8px;
+            height: 8px;
+
+            border-radius: 50%;
+
+            background: #18c58b;
+
+            box-shadow:
+                0 0 0 4px rgba(24,197,139,0.12);
+        }
+
+
+        /* =========================================================
+           TOPBAR
+        ========================================================= */
+
+        .main {
+
+            margin-left: 225px;
+
+            min-height: 100vh;
+        }
+
+
+        .topbar {
+
+            height: 72px;
+
+            background: white;
+
+            border-bottom:
+                1px solid var(--border);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: flex-end;
+
+            gap: 12px;
+
+            padding: 0 28px;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 50;
+        }
+
+
+        .filter-group {
+
+            display: flex;
+
+            flex-direction: column;
+        }
+
+
+        .topbar-label {
+
+            font-size: 10px;
+
+            font-weight: 600;
+
+            color: var(--muted);
+
+            margin-bottom: 4px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.5px;
+        }
+
+
+        .filter-select {
+
+            height: 34px;
+
+            min-width: 140px;
+
+            padding: 0 10px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 6px;
+
+            background: white;
+
+            color: var(--text);
+
+            font-size: 12px;
+
+            outline: none;
+        }
+
+
+        .analyst {
+
+            position: relative;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin-left: 10px;
+
+            padding-left: 15px;
+
+            border-left:
+                1px solid var(--border);
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+
+        .analyst-button {
+
+            border: none;
+
+            background: transparent;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            color: var(--text);
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            padding: 5px;
+        }
+
+
+        .analyst-avatar {
+
+            width: 31px;
+            height: 31px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #edf4fc;
+
+            color: var(--blue);
+
+            font-size: 13px;
+        }
+
+
+        .user-menu {
+
+            position: absolute;
+
+            right: 0;
+
+            top: 48px;
+
+            width: 185px;
+
+            background: white;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 8px;
+
+            box-shadow:
+                0 10px 30px rgba(20,55,90,0.15);
+
+            padding: 7px;
+
+            display: none;
+
+            z-index: 300;
+        }
+
+
+        .user-menu.show {
+            display: block;
+        }
+
+
+        .user-menu-header {
+
+            padding: 10px;
+
+            border-bottom:
+                1px solid #edf1f5;
+
+            margin-bottom: 5px;
+        }
+
+
+        .user-menu-name {
+
+            font-size: 12px;
+
+            font-weight: 700;
+        }
+
+
+        .user-menu-role {
+
+            font-size: 10px;
+
+            color: var(--muted);
+
+            margin-top: 3px;
+        }
+
+
+        .menu-item {
+
+            width: 100%;
+
+            border: none;
+
+            background: transparent;
+
+            text-align: left;
+
+            padding: 9px 10px;
+
+            border-radius: 5px;
+
+            font-size: 11px;
+
+            color: #536a83;
+        }
+
+
+        .menu-item:hover {
+
+            background: #f3f7fb;
+
+            color: var(--text);
+        }
+
+
+        .menu-item.logout {
+
+            color: #c24f5b;
+        }
+
+
+        /* =========================================================
+           CONTENT
+        ========================================================= */
+
+        .content {
+
+            padding: 26px 28px 35px;
+        }
+
+
+        .page-header {
+
+            display: flex;
+
+            align-items: flex-end;
+
+            justify-content: space-between;
+
+            margin-bottom: 20px;
+        }
+
+
+        .eyebrow {
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            color: var(--blue);
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.2px;
+
+            margin-bottom: 6px;
+        }
+
+
+        .page-header h1 {
+
+            font-size: 29px;
+
+            color: var(--text);
+        }
+
+
+        .page-header p {
+
+            color: var(--muted);
+
+            font-size: 14px;
+
+            margin-top: 6px;
+        }
+
+
+        .header-actions {
+
+            display: flex;
+
+            gap: 8px;
+        }
+
+
+        .btn {
+
+            border: none;
+
+            border-radius: 7px;
+
+            padding: 10px 15px;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            transition: 0.15s;
+        }
+
+
+        .btn:hover {
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 6px 16px rgba(20,55,90,0.12);
+        }
+
+
+        .btn-primary {
+
+            background: var(--blue);
+
+            color: white;
+        }
+
+
+        .btn-secondary {
+
+            background: white;
+
+            color: var(--text);
+
+            border:
+                1px solid var(--border);
+        }
+
+
+        /* =========================================================
+           CARDS
+        ========================================================= */
+
+        .summary {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 14px;
+
+            margin-bottom: 14px;
+        }
+
+
+        .summary-card {
+
+            background: white;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 9px;
+
+            padding: 17px 18px;
+
+            min-height: 94px;
+
+            box-shadow: var(--shadow);
+
+            position: relative;
+        }
+
+
+        .summary-card::before {
+
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            top: 0;
+            bottom: 0;
+
+            width: 3px;
+
+            background: var(--blue);
+        }
+
+
+        .summary-card.red::before {
+
+            background: var(--red);
+        }
+
+
+        .summary-card.green::before {
+
+            background: var(--green);
+        }
+
+
+        .card-label {
+
+            color: var(--muted);
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.6px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .card-value {
+
+            color: var(--text);
+
+            font-size: 23px;
+
+            font-weight: 750;
+        }
+
+
+        .card-subtitle {
+
+            color: #8495aa;
+
+            font-size: 10px;
+
+            margin-top: 5px;
+        }
+
+
+        /* =========================================================
+           PANELS
+        ========================================================= */
+
+        .analysis-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1fr)
+                minmax(0, 1fr)
+                235px;
+
+            gap: 14px;
+
+            margin-bottom: 14px;
+        }
+
+
+        .panel {
+
+            background: white;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 9px;
+
+            padding: 18px;
+
+            box-shadow: var(--shadow);
+        }
+
+
+        .panel-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 14px;
+        }
+
+
+        .panel-title {
+
+            font-size: 15px;
+
+            font-weight: 700;
+        }
+
+
+        .panel-badge {
+
+            font-size: 10px;
+
+            padding: 4px 8px;
+
+            border-radius: 20px;
+
+            background: var(--blue-light);
+
+            color: var(--blue);
+
+            font-weight: 700;
+        }
+
+
+        .panel-badge.purple {
+
+            background: var(--purple-light);
+
+            color: var(--purple);
+        }
+
+
+        /* =========================================================
+           FEATURES
+        ========================================================= */
+
+        .feature-row {
+
+            display: grid;
+
+            grid-template-columns:
+                25px
+                minmax(90px, 1fr)
+                42px
+                90px;
+
+            align-items: center;
+
+            gap: 4px;
+
+            min-height: 36px;
+
+            border-radius: 6px;
+
+            padding: 4px 5px;
+
+            cursor: pointer;
+        }
+
+
+        .feature-row:hover {
+
+            background: #f5f8fc;
+        }
+
+
+        .feature-row.selected {
+
+            background: #edf5ff;
+
+            outline:
+                1px solid #cfe3fa;
+        }
+
+
+        .rank {
+
+            color: #8091a5;
+
+            font-size: 11px;
+
+            font-weight: 700;
+        }
+
+
+        .feature-name {
+
+            color: #29496e;
+
+            font-size: 12px;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+
+            white-space: nowrap;
+        }
+
+
+        .feature-value {
+
+            color: var(--text);
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            text-align: right;
+        }
+
+
+        .bar-background {
+
+            height: 7px;
+
+            background: #e9eff5;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            margin-left: 8px;
+        }
+
+
+        .bar {
+
+            height: 100%;
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #438fe4,
+                    #2d7ed6
+                );
+        }
+
+
+        .lime-bar {
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #9b82e7,
+                    #795ed1
+                );
+        }
+
+
+        /* =========================================================
+           AGREEMENT
+        ========================================================= */
+
+        .agreement {
+
+            text-align: center;
+        }
+
+
+        .agreement-title {
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            margin-bottom: 10px;
+        }
+
+
+        .circle {
+
+            width: 132px;
+            height: 132px;
+
+            margin: 8px auto 14px;
+
+            border-radius: 50%;
+
+            background:
+                conic-gradient(
+                    var(--green) 0deg,
+                    var(--green) 193.86deg,
+                    #e3eaf1 193.86deg,
+                    #e3eaf1 360deg
+                );
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        .circle-inner {
+
+            width: 94px;
+            height: 94px;
+
+            border-radius: 50%;
+
+            background: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 18px;
+
+            font-weight: 750;
+        }
+
+
+        .agreement-stat {
+
+            font-size: 12px;
+
+            line-height: 1.9;
+
+            color: #536b86;
+        }
+
+
+        .formula {
+
+            font-size: 10px;
+
+            color: #8495aa;
+
+            margin-top: 7px;
+        }
+
+
+        /* =========================================================
+           BOTTOM
+        ========================================================= */
+
+        .bottom-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 0.9fr)
+                minmax(0, 1.4fr);
+
+            gap: 14px;
+        }
+
+
+        .recommendation {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f1fbf7,
+                    #eaf8f3
+                );
+
+            border:
+                1px solid #c9eade;
+
+            border-radius: 9px;
+
+            padding: 21px;
+        }
+
+
+        .recommendation-header {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            color: var(--green);
+
+            font-size: 16px;
+
+            font-weight: 750;
+        }
+
+
+        .recommendation-icon {
+
+            width: 27px;
+            height: 27px;
+
+            border-radius: 50%;
+
+            background: #d5f4e8;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        .recommendation-result {
+
+            margin-top: 21px;
+
+            font-size: 20px;
+
+            font-weight: 750;
+        }
+
+
+        .recommendation-description {
+
+            margin-top: 7px;
+
+            font-size: 12px;
+
+            color: #647b93;
+
+            line-height: 1.6;
+        }
+
+
+        .why {
+
+            background: white;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 9px;
+
+            padding: 21px;
+
+            box-shadow: var(--shadow);
+        }
+
+
+        .why-title {
+
+            font-size: 16px;
+
+            font-weight: 750;
+
+            margin-bottom: 14px;
+        }
+
+
+        .reason {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            background: #f5f8fb;
+
+            border:
+                1px solid #edf1f5;
+
+            padding: 9px 11px;
+
+            border-radius: 6px;
+
+            margin: 6px 0;
+
+            font-size: 11px;
+
+            color: #526b86;
+        }
+
+
+        .check {
+
+            color: var(--green);
+
+            font-weight: 800;
+        }
+
+
+        /* =========================================================
+           VIEWS
+        ========================================================= */
+
+        .view {
+            display: none;
+        }
+
+
+        .view.active {
+
+            display: block;
+
+            animation:
+                fadeIn 0.2s ease;
+        }
+
+
+        @keyframes fadeIn {
+
+            from {
+                opacity: 0;
+                transform: translateY(3px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        /* =========================================================
+           TOAST
+        ========================================================= */
+
+        .toast {
+
+            position: fixed;
+
+            right: 25px;
+
+            bottom: 25px;
+
+            background: #142f50;
+
+            color: white;
+
+            padding: 12px 17px;
+
+            border-radius: 7px;
+
+            font-size: 12px;
+
+            box-shadow:
+                0 8px 25px rgba(0,0,0,0.18);
+
+            opacity: 0;
+
+            transform: translateY(10px);
+
+            pointer-events: none;
+
+            transition:
+                opacity 0.25s,
+                transform 0.25s;
+
+            z-index: 500;
+        }
+
+
+        .toast.show {
+
+            opacity: 1;
+
+            transform: translateY(0);
+        }
+
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media (max-width: 1100px) {
+
+            .analysis-grid {
+
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+            .agreement {
+
+                grid-column:
+                    span 2;
+            }
+
+            .summary {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+        }
+
+
+        @media (max-width: 800px) {
+
+            .sidebar {
+
+                width: 70px;
+            }
+
+            .logo {
+
+                padding:
+                    3px 7px 25px;
+            }
+
+            .logo-title {
+
+                font-size: 12px;
+            }
+
+            .logo-subtitle,
+            .logo-line,
+            .nav-label,
+            .status-title,
+            .status-row span {
+
+                display: none;
+            }
+
+            .nav-item {
+
+                justify-content: center;
+
+                padding:
+                    13px 8px;
+            }
+
+            .main {
+
+                margin-left: 70px;
+            }
+
+            .topbar {
+
+                height: auto;
+
+                padding:
+                    10px 15px;
+
+                flex-wrap: wrap;
+
+                justify-content:
+                    flex-start;
+            }
+
+            .content {
+
+                padding:
+                    18px 15px;
+            }
+
+            .page-header {
+
+                flex-direction:
+                    column;
+
+                align-items:
+                    flex-start;
+
+                gap: 15px;
+            }
+
+            .summary {
+
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+            .analysis-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+            .agreement {
+
+                grid-column:
+                    auto;
+            }
+
+            .bottom-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+        }
+
+
+        @media (max-width: 500px) {
+
+            .summary {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+            .login-card {
+
+                padding: 25px 20px;
+            }
+        }
+
+    
+
+        /* =========================================================
+           DATASET MANAGEMENT
+        ========================================================= */
+
+        .dataset-section {
+            padding: 16px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: #fbfdff;
+        }
+
+        .dataset-section h3 {
+            margin: 0 0 5px;
+            font-size: 14px;
+            color: var(--text);
+        }
+
+        .dataset-section p {
+            margin: 0 0 14px;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .dataset-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dataset-main-select {
+            flex: 1;
+            height: 38px;
+            padding: 0 10px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: white;
+            color: var(--text);
+            font-size: 12px;
+            outline: none;
+        }
+
+        .upload-label {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 38px;
+            padding: 0 15px;
+            border-radius: 6px;
+            background: var(--blue-light);
+            color: var(--blue);
+            border: 1px solid #cfe3fa;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .upload-label:hover {
+            background: #dfeeff;
+        }
+
+        #datasetFileInput {
+            display: none;
+        }
+
+        .selected-file {
+            display: none;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: white;
+            color: #536b86;
+            font-size: 11px;
+        }
+
+        .selected-file.show {
+            display: flex;
+        }
+
+        .selected-file-name {
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-weight: 600;
+        }
+
+        .remove-file {
+            border: none;
+            background: transparent;
+            color: #bd5965;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .dataset-status {
+            margin-top: 10px;
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        .dataset-status.success {
+            color: var(--green);
+            font-weight: 600;
+        }
+
+        .active-dataset-box {
+            margin-top: 18px;
+            padding: 18px;
+            border-radius: 8px;
+            background: #f4f8fc;
+            border: 1px solid #e2eaf2;
+        }
+
+        .active-label {
+            color: var(--blue);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 7px;
+        }
+
+        .active-dataset-box h2 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .active-dataset-box p {
+            margin-top: 7px;
+            margin-bottom: 0;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        @media (max-width: 700px) {
+            .dataset-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================================
+         LOGIN PAGE
+    ========================================================= -->
+
+    <section id="loginPage">
+
+
+        <div class="login-decoration decoration-one"></div>
+
+        <div class="login-decoration decoration-two"></div>
+
+
+        <div class="login-container">
+
+
+            <div class="login-brand">
+
+                <div class="login-brand-title">
+                    XAI-CYBER
+                </div>
+
+                <div class="login-brand-subtitle">
+                    ANALYTICS
+                </div>
+
+                <div class="login-brand-line"></div>
+
+            </div>
+
+
+            <div class="login-card">
+
+
+                <div class="login-heading">
+
+                    <h1>
+                        Analyst Sign In
+                    </h1>
+
+                    <p>
+                        Access your cybersecurity
+                        intelligence dashboard
+                    </p>
+
+                </div>
+
+
+                <!-- ERROR -->
+
+                <div
+                    class="login-error"
+                    id="loginError">
+
+                    Invalid username or password.
+                    Please try again.
+
+                </div>
+
+
+                <!-- LOGIN FORM -->
+
+                <form id="loginForm">
+
+
+                    <!-- USERNAME -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Username
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">
+                                ◉
+                            </span>
+
+                            <input
+                                type="text"
+                                id="username"
+                                class="login-input"
+                                placeholder="Enter username"
+                                autocomplete="username"
+                                required>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Password
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">
+                                ●
+                            </span>
+
+                            <input
+                                type="password"
+                                id="password"
+                                class="login-input"
+                                placeholder="Enter password"
+                                autocomplete="current-password"
+                                required>
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                id="passwordToggle">
+
+                                Show
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- OPTIONS -->
+
+                    <div class="login-options">
+
+                        <label class="remember">
+
+                            <input
+                                type="checkbox"
+                                id="rememberMe">
+
+                            Remember me
+
+                        </label>
+
+
+                        <button
+                            type="button"
+                            class="forgot"
+                            id="forgotBtn">
+
+                            Forgot password?
+
+                        </button>
+
+                    </div>
+
+
+                    <!-- SUBMIT -->
+
+                    <button
+                        type="submit"
+                        class="login-button"
+                        id="loginButton">
+
+                        SIGN IN
+
+                    </button>
+
+
+                </form>
+
+
+                <!-- DEMO LOGIN -->
+
+                <div class="login-demo">
+
+                    <strong>
+                        Prototype Login
+                    </strong>
+
+                    <br>
+
+                    Username:
+                    <strong>analyst</strong>
+
+                    &nbsp; | &nbsp;
+
+                    Password:
+                    <strong>admin123</strong>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="login-footer">
+
+                XAI-Cyber Analytics
+                &nbsp;•&nbsp;
+                Explainable Security Intelligence
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         DASHBOARD APP
+    ========================================================= -->
+
+    <div id="dashboardApp">
+
+
+        <!-- =====================================================
+             SIDEBAR
+        ===================================================== -->
+
+        <aside class="sidebar">
+
+
+            <div class="logo">
+
+                <div class="logo-title">
+                    XAI-CYBER
+                </div>
+
+                <div class="logo-subtitle">
+                    ANALYTICS
+                </div>
+
+                <div class="logo-line"></div>
+
+            </div>
+
+
+            <nav class="navigation">
+
+
+                <button
+                    class="nav-item active"
+                    data-view="dashboard">
+
+                    <span class="nav-icon">⌂</span>
+
+                    <span class="nav-label">
+                        Dashboard
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="nav-item"
+                    data-view="dataset">
+
+                    <span class="nav-icon">◉</span>
+
+                    <span class="nav-label">
+                        Dataset
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="nav-item"
+                    data-view="model">
+
+                    <span class="nav-icon">◇</span>
+
+                    <span class="nav-label">
+                        Model
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="nav-item"
+                    data-view="compare">
+
+                    <span class="nav-icon">⇄</span>
+
+                    <span class="nav-label">
+                        XAI Compare
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="nav-item"
+                    data-view="analysis">
+
+                    <span class="nav-icon">▤</span>
+
+                    <span class="nav-label">
+                        Analysis
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="nav-item"
+                    data-view="reports">
+
+                    <span class="nav-icon">▧</span>
+
+                    <span class="nav-label">
+                        Reports
+                    </span>
+
+                </button>
+
+
+            </nav>
+
+
+            <div class="sidebar-status">
+
+                <div class="status-title">
+                    System Status
+                </div>
+
+                <div class="status-row">
+
+                    <span class="status-dot"></span>
+
+                    <span>
+                        XAI Engine Online
+                    </span>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+
+        <!-- =====================================================
+             MAIN
+        ===================================================== -->
+
+        <main class="main">
+
+
+            <!-- TOP BAR -->
+
+            <header class="topbar">
+
+
+                <div class="filter-group">
+
+                    <label class="topbar-label">
+                        Dataset
+                    </label>
+
+                    <select
+                        id="datasetSelect"
+                        class="filter-select">
+
+                        <option>
+                            CICIoT2019
+                        </option>
+
+                        <option>
+                            CIC-DDoS2019
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="filter-group">
+
+                    <label class="topbar-label">
+                        Model
+                    </label>
+
+                    <select
+                        id="modelSelect"
+                        class="filter-select">
+
+                        <option>
+                            XGBoost
+                        </option>
+
+                        <option>
+                            Random Forest
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="filter-group">
+
+                    <label class="topbar-label">
+                        Attack Type
+                    </label>
+
+                    <select
+                        id="attackSelect"
+                        class="filter-select">
+
+                        <option>
+                            DDoS
+                        </option>
+
+                        <option>
+                            Benign
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- USER -->
+
+                <div class="analyst">
+
+
+                    <button
+                        class="analyst-button"
+                        id="userButton">
+
+                        <span class="analyst-avatar">
+                            A
+                        </span>
+
+                        Analyst
+
+                        <span>
+                            ▾
+                        </span>
+
+                    </button>
+
+
+                    <div
+                        class="user-menu"
+                        id="userMenu">
+
+
+                        <div class="user-menu-header">
+
+                            <div class="user-menu-name">
+                                Analyst
+                            </div>
+
+                            <div class="user-menu-role">
+                                Security Analyst
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            class="menu-item"
+                            id="profileBtn">
+
+                            Profile
+
+                        </button>
+
+
+                        <button
+                            class="menu-item"
+                            id="settingsBtn">
+
+                            Settings
+
+                        </button>
+
+
+                        <button
+                            class="menu-item logout"
+                            id="logoutBtn">
+
+                            Log out
+
+                        </button>
+
+
+                    </div>
+
+                </div>
+
+
+            </header>
+
+
+
+            <!-- =================================================
+                 CONTENT
+            ================================================= -->
+
+            <section class="content">
+
+
+                <!-- DASHBOARD -->
+
+                <div
+                    id="dashboardView"
+                    class="view active">
+
+
+                    <div class="page-header">
+
+
+                        <div>
+
+                            <div class="eyebrow">
+                                XAI Security Intelligence
+                            </div>
+
+                            <h1>
+                                Cybersecurity XAI Dashboard
+                            </h1>
+
+                            <p>
+                                SHAP vs LIME explainability
+                                analysis for intrusion detection.
+                            </p>
+
+                        </div>
+
+
+                        <div class="header-actions">
+
+
+                            <button
+                                class="btn btn-secondary"
+                                id="refreshBtn">
+
+                                ↻ Refresh
+
+                            </button>
+
+
+                            <button
+                                class="btn btn-primary"
+                                id="analyzeBtn">
+
+                                Run Analysis
+
+                            </button>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- SUMMARY -->
+
+                    <div class="summary">
+
+
+                        <div class="summary-card">
+
+                            <div class="card-label">
+                                Model
+                            </div>
+
+                            <div
+                                class="card-value"
+                                id="modelValue">
+
+                                XGBoost
+
+                            </div>
+
+                            <div class="card-subtitle">
+                                Selected ML classifier
+                            </div>
+
+                        </div>
+
+
+                        <div class="summary-card red">
+
+                            <div class="card-label">
+                                Attack Type
+                            </div>
+
+                            <div
+                                class="card-value"
+                                id="attackValue">
+
+                                DDoS
+
+                            </div>
+
+                            <div class="card-subtitle">
+                                Current traffic classification
+                            </div>
+
+                        </div>
+
+
+                        <div class="summary-card green">
+
+                            <div class="card-label">
+                                Jaccard Similarity
+                            </div>
+
+                            <div
+                                class="card-value"
+                                id="jaccardValue">
+
+                                53.85%
+
+                            </div>
+
+                            <div class="card-subtitle">
+                                SHAP / LIME feature agreement
+                            </div>
+
+                        </div>
+
+
+                        <div class="summary-card green">
+
+                            <div class="card-label">
+                                Recommendation
+                            </div>
+
+                            <div
+                                class="card-value"
+                                id="recommendationValue">
+
+                                LIME
+
+                            </div>
+
+                            <div class="card-subtitle">
+                                Recommended explanation method
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- ANALYSIS -->
+
+                    <div class="analysis-grid">
+
+
+                        <!-- SHAP -->
+
+                        <div class="panel">
+
+                            <div class="panel-header">
+
+                                <div class="panel-title">
+                                    Top Features — SHAP
+                                </div>
+
+                                <div class="panel-badge">
+                                    Global
+                                </div>
+
+                            </div>
+
+
+                            <div id="shapFeatures">
+
+
+                                <div
+                                    class="feature-row"
+                                    data-feature="Flow Duration">
+
+                                    <span class="rank">
+                                        01
+                                    </span>
+
+                                    <span class="feature-name">
+                                        Flow Duration
+                                    </span>
+
+                                    <span class="feature-value">
+                                        .82
+                                    </span>
+
+                                    <div class="bar-background">
+
+                                        <div
+                                            class="bar"
+                                            style="width:82%">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div
+                                    class="feature-row"
+                                    data-feature="Tot Fwd Pkts">
+
+                                    <span class="rank">
+                                        02
+                                    </span>
+
+                                    <span class="feature-name">
+                                        Tot Fwd Pkts
+                                    </span>
+
+                                    <span class="feature-value">
+                                        .74
+                                    </span>
+
+                                    <div class="bar-background">
+
+                                        <div
+                                            class="bar"
+                                            style="width:74%">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div
+                                    class="feature-row"
+                                    data-feature="Flow Bytes/s">
+
+                                    <span class="rank">
+                                        03
+                                    </span>
+
+                                    <span class="feature-name">
+                                        Flow Bytes/s
+                                    </span>
+
+                                    <span class="feature-value">
+                                        .68
+                                    </span>
+
+                                    <div class="bar-background">
+
+                                        <div
+                                            class="bar"
+                                            style="width:68%">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div
+                                    class="feature-row"
+                                    data-feature="TotLen Fwd Pkts">
+
+                                    <span class="rank">
+                                        04
+                                    </span>
+
+                                    <span class="feature-name">
+                                        TotLen Fwd Pkts
+                                    </span>
+
+                                    <span class="feature-value">
+                                        .57
+                                    </span>
+
+                                    <div class="bar-background">
+
+                                        <div
+                                            class="bar"
+                                            style="width:57%">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div
+                                    class="feature-row"
+                                    data-feature="Fwd Pkt Len Max">
+
+                                    <span class="rank">
+                                        05
+                                    </span>
+
+                                    <span class="feature-name">
+                                        Fwd Pkt Len Max
+                                    </span>
+
+                                    <span class="feature-value">
+                                        .46
+                                    </span>
+
+                                    <div class="bar-background">
+
+                                        <div
+                                            class="bar"
+                                            style="width:46%">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- LIME -->
+
+                        <div class="panel">
+
+                            <div class="panel-header">
+
+                                <div class="panel-title">
+                                    Top Features — LIME
+                                </div>
+
+                                <div class="panel-badge"
+                                     style="background:#f1edff;color:#8768dd">
+
+                                    Local
+
+                                </div>
+
+                            </div>
+
+
+                            <div id="limeFeatures">
+
+
+                                <div
+                                    class="feature-row"
+                                    data-feature="Flow Duration">
+
+                                    <span class="rank">
+                                        01
+                                    </span>
+
+                                    <span class="feature-name">
+                                        Flow Duration
+                                    </span>
+
+                                    <span class="feature-value">
+                                        .86
+                                    </span>
+
+                                    <div class="bar-background">
+
+                                        <div
+                                            class="bar lime-bar"
+                                            style="width:86%">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div
+                                    class="feature-row"
+                                    data-feature="Flow Bytes/s">
+
+                                    <span class="rank">
+                                        02
+                                    </span>
+
+                                    <span class="feature-name">
+                                        Flow Bytes/s
+                                    </span>
+
+                                    <span class="feature-value">
+                                        .79
+                                    </span>
+
+                                    <div class="bar-background">
+
+                                        <div
+                                            class="bar lime-bar"
+                                            style="width:79%">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div
+                                    class="feature-row"
+                                    data-feature="Tot Fwd Pkts">
+
+                                    <span class="rank">
+                                        03
+                                    </span>
+
+                                    <span class="feature-name">
+                                        Tot Fwd Pkts
+                                    </span>
+
+                                    <span class="feature-value">
+                                        .71
+                                    </span>
+
+                                    <div class="bar-background">
+
+                                        <div
+                                            class="bar lime-bar"
+                                            style="width:71%">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div
+                                    class="feature-row"
+                                    data-feature="Fwd Header Len">
+
+                                    <span class="rank">
+                                        04
+                                    </span>
+
+                                    <span class="feature-name">
+                                        Fwd Header Len
+                                    </span>
+
+                                    <span class="feature-value">
+                                        .63
+                                    </span>
+
+                                    <div class="bar-background">
+
+                                        <div
+                                            class="bar lime-bar"
+                                            style="width:63%">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div
+                                    class="feature-row"
+                                    data-feature="Packet Length Mean">
+
+                                    <span class="rank">
+                                        05
+                                    </span>
+
+                                    <span class="feature-name">
+                                        Packet Length Mean
+                                    </span>
+
+                                    <span class="feature-value">
+                                        .52
+                                    </span>
+
+                                    <div class="bar-background">
+
+                                        <div
+                                            class="bar lime-bar"
+                                            style="width:52%">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- AGREEMENT -->
+
+                        <div class="panel agreement">
+
+
+                            <div class="agreement-title">
+                                Feature Agreement
+                            </div>
+
+
+                            <div
+                                class="circle"
+                                id="agreementCircle">
+
+                                <div
+                                    class="circle-inner"
+                                    id="jaccardCircle">
+
+                                    53.85%
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="agreement-stat">
+
+                                <strong>
+                                    Common Features:
+                                </strong>
+
+                                <span id="commonFeatures">
+                                    7
+                                </span>
+
+                                <br>
+
+                                <strong>
+                                    Total Unique:
+                                </strong>
+
+                                <span id="uniqueFeatures">
+                                    13
+                                </span>
+
+                            </div>
+
+
+                            <div class="formula">
+
+                                J(A,B) =
+                                |A ∩ B| / |A ∪ B|
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- BOTTOM -->
+
+                    <div class="bottom-grid">
+
+
+                        <div class="recommendation">
+
+
+                            <div class="recommendation-header">
+
+                                <div class="recommendation-icon">
+                                    ✓
+                                </div>
+
+                                Recommendation
+
+                            </div>
+
+
+                            <div
+                                class="recommendation-result"
+                                id="recommendationText">
+
+                                LIME Recommended
+
+                            </div>
+
+
+                            <div class="recommendation-description">
+
+                                The explanation method is selected
+                                based on feature agreement,
+                                explanation suitability and
+                                comparison results.
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="why">
+
+
+                            <div class="why-title">
+                                Why this recommendation?
+                            </div>
+
+
+                            <div class="reason">
+
+                                <span class="check">
+                                    ✓
+                                </span>
+
+                                Good feature agreement with SHAP
+                                (<span id="reasonJaccard">
+                                    53.85%
+                                </span>)
+
+                            </div>
+
+
+                            <div class="reason">
+
+                                <span class="check">
+                                    ✓
+                                </span>
+
+                                Strong local explanation for
+                                this prediction
+
+                            </div>
+
+
+                            <div class="reason">
+
+                                <span class="check">
+                                    ✓
+                                </span>
+
+                                Clear identification of
+                                influential features
+
+                            </div>
+
+
+                            <div class="reason">
+
+                                <span class="check">
+                                    ✓
+                                </span>
+
+                                Suitable for explaining this
+                                specific attack instance
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     OTHER VIEWS
+                ================================================= -->
+
+
+                <div
+                    id="datasetView"
+                    class="view">
+
+                    <div class="page-header">
+
+                        <div>
+
+                            <div class="eyebrow">
+                                Data Management
+                            </div>
+
+                            <h1>
+                                Dataset
+                            </h1>
+
+                            <p>
+                                Manage the selected cybersecurity dataset.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="panel">
+
+                        <div class="panel-title">
+                            Dataset Management
+                        </div>
+
+                        <br>
+
+                        <div class="dataset-section">
+
+                            <h3>Select Existing Dataset</h3>
+
+                            <p>
+                                Choose a dataset already available in the system.
+                            </p>
+
+                            <div class="dataset-row">
+
+                                <select
+                                    id="dashboardDatasetSelect"
+                                    class="dataset-main-select">
+
+                                    <option value="CICIoT2019">
+                                        CICIoT2019
+                                    </option>
+
+                                    <option value="CIC-DDoS2019">
+                                        CIC-DDoS2019
+                                    </option>
+
+                                </select>
+
+                                <button
+                                    class="btn btn-secondary"
+                                    id="useSelectedDatasetBtn"
+                                    type="button">
+
+                                    Use Dataset
+
+                                </button>
+
+                            </div>
+
+                            <div
+                                class="dataset-status"
+                                id="datasetSelectStatus">
+
+                                Current dataset: CICIoT2019
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="dataset-section">
+
+                            <h3>Upload Your Dataset</h3>
+
+                            <p>
+                                Upload a CSV dataset for custom analysis.
+                            </p>
+
+                            <div class="dataset-row">
+
+                                <label
+                                    for="datasetFileInput"
+                                    class="upload-label">
+
+                                    + Upload CSV
+
+                                </label>
+
+                                <input
+                                    type="file"
+                                    id="datasetFileInput"
+                                    accept=".csv,text/csv">
+
+                            </div>
+
+                            <div
+                                class="dataset-status"
+                                id="uploadStatus">
+
+                                No custom dataset selected.
+
+                            </div>
+
+                            <div
+                                class="selected-file"
+                                id="selectedFileBox">
+
+                                <span>📄</span>
+
+                                <span
+                                    class="selected-file-name"
+                                    id="selectedFileName">
+
+                                    No file selected
+
+                                </span>
+
+                                <button
+                                    class="remove-file"
+                                    id="removeFileBtn"
+                                    type="button">
+
+                                    Remove
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="active-dataset-box">
+
+                            <div class="active-label">
+                                ACTIVE DATASET
+                            </div>
+
+                            <h2 id="datasetName">
+                                CICIoT2019
+                            </h2>
+
+                            <p>
+                                This dataset will be used for the XAI analysis.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div
+                    id="modelView"
+                    class="view">
+
+                    <div class="page-header">
+
+                        <div>
+
+                            <div class="eyebrow">
+                                Machine Learning
+                            </div>
+
+                            <h1>
+                                Model
+                            </h1>
+
+                            <p>
+                                View the active machine learning model.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="panel">
+
+                        <div class="panel-title">
+                            Active Model
+                        </div>
+
+                        <br>
+
+                        <h2 id="modelName">
+                            XGBoost
+                        </h2>
+
+                        <br>
+
+                        <p style="color:#6d8098;font-size:13px">
+
+                            XGBoost will later be loaded
+                            through the Python backend.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div
+                    id="compareView"
+                    class="view">
+
+                    <div class="page-header">
+
+                        <div>
+
+                            <div class="eyebrow">
+                                Explainability
+                            </div>
+
+                            <h1>
+                                XAI Compare
+                            </h1>
+
+                            <p>
+                                Compare SHAP and LIME explanations.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="analysis-grid">
+
+                        <div class="panel">
+
+                            <div class="panel-title">
+                                SHAP
+                            </div>
+
+                            <br>
+
+                            <p style="color:#6d8098;font-size:13px;line-height:1.7">
+
+                                SHAP provides global feature
+                                importance and explains how
+                                features influence the model.
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="panel">
+
+                            <div class="panel-title">
+                                LIME
+                            </div>
+
+                            <br>
+
+                            <p style="color:#6d8098;font-size:13px;line-height:1.7">
+
+                                LIME provides a local explanation
+                                for the selected prediction.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div
+                    id="analysisView"
+                    class="view">
+
+                    <div class="page-header">
+
+                        <div>
+
+                            <div class="eyebrow">
+                                Security Analysis
+                            </div>
+
+                            <h1>
+                                Analysis
+                            </h1>
+
+                            <p>
+                                Run and inspect the current XAI analysis.
+                            </p>
+
+                        </div>
+
+
+                        <button
+                            class="btn btn-primary"
+                            id="analysisRunBtn">
+
+                            Run Analysis
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="panel">
+
+                        <div class="panel-title">
+                            Analysis Status
+                        </div>
+
+                        <br>
+
+                        <p
+                            id="analysisStatus"
+                            style="
+                            color:#6d8098;
+                            font-size:13px;
+                            ">
+
+                            Ready for analysis.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div
+                    id="reportsView"
+                    class="view">
+
+                    <div class="page-header">
+
+                        <div>
+
+                            <div class="eyebrow">
+                                Reporting
+                            </div>
+
+                            <h1>
+                                Reports
+                            </h1>
+
+                            <p>
+                                Generate a summary of the XAI analysis.
+                            </p>
+
+                        </div>
+
+
+                        <button
+                            class="btn btn-primary"
+                            id="reportBtn">
+
+                            Generate Report
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="panel">
+
+                        <div class="panel-title">
+                            Current Analysis Summary
+                        </div>
+
+                        <br>
+
+                        <p
+                            id="reportText"
+                            style="
+                            color:#6d8098;
+                            font-size:13px;
+                            line-height:1.8;
+                            ">
+
+                            Dataset: CICIoT2019<br>
+                            Model: XGBoost<br>
+                            Attack Type: DDoS<br>
+                            Jaccard Similarity: 53.85%<br>
+                            Recommendation: LIME<br>
+                            Analysis Status: Ready
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+
+    <!-- TOAST -->
+
+    <div
+        class="toast"
+        id="toast">
+
+        Action completed.
+
+    </div>
+
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================= -->
+
+    <script>
+
+
+        /* =========================================================
+           LOGIN
+        ========================================================= */
+
+        const loginPage =
+            document.getElementById(
+                "loginPage"
+            );
+
+        const dashboardApp =
+            document.getElementById(
+                "dashboardApp"
+            );
+
+
+        const loginForm =
+            document.getElementById(
+                "loginForm"
+            );
+
+        const usernameInput =
+            document.getElementById(
+                "username"
+            );
+
+        const passwordInput =
+            document.getElementById(
+                "password"
+            );
+
+        const loginError =
+            document.getElementById(
+                "loginError"
+            );
+
+
+        loginForm.addEventListener(
+            "submit",
+            function (event) {
+
+                event.preventDefault();
+
+
+                const username =
+                    usernameInput.value.trim();
+
+                const password =
+                    passwordInput.value;
+
+
+                /*
+                 * PROTOTYPE CREDENTIALS
+                 */
+
+                if (
+                    username === "analyst" &&
+                    password === "admin123"
+                ) {
+
+                    loginError.style.display =
+                        "none";
+
+
+                    loginPage.style.display =
+                        "none";
+
+
+                    dashboardApp.style.display =
+                        "block";
+
+
+                    showToast(
+                        "Welcome, Analyst"
+                    );
+
+                }
+
+                else {
+
+                    loginError.style.display =
+                        "block";
+
+                    passwordInput.value = "";
+
+                }
+
+            }
+        );
+
+
+        /* =========================================================
+           SHOW / HIDE PASSWORD
+        ========================================================= */
+
+        document.getElementById(
+            "passwordToggle"
+        ).addEventListener(
+            "click",
+            function () {
+
+                if (
+                    passwordInput.type ===
+                    "password"
+                ) {
+
+                    passwordInput.type =
+                        "text";
+
+                    this.textContent =
+                        "Hide";
+
+                }
+
+                else {
+
+                    passwordInput.type =
+                        "password";
+
+                    this.textContent =
+                        "Show";
+
+                }
+
+            }
+        );
+
+
+        /* =========================================================
+           FORGOT PASSWORD
+        ========================================================= */
+
+        document.getElementById(
+            "forgotBtn"
+        ).addEventListener(
+            "click",
+            function () {
+
+                alert(
+                    "Password recovery will be connected to the backend later."
+                );
+
+            }
+        );
+
+
+        /* =========================================================
+           TOAST
+        ========================================================= */
+
+        const toast =
+            document.getElementById(
+                "toast"
+            );
+
+
+        function showToast(message) {
+
+            toast.textContent =
+                message;
+
+            toast.classList.add(
+                "show"
+            );
+
+
+            setTimeout(
+                () => {
+
+                    toast.classList.remove(
+                        "show"
+                    );
+
+                },
+                2200
+            );
+
+        }
+
+
+        /* =========================================================
+           NAVIGATION
+        ========================================================= */
+
+        const navItems =
+            document.querySelectorAll(
+                ".nav-item"
+            );
+
+        const views =
+            document.querySelectorAll(
+                ".view"
+            );
+
+
+        navItems.forEach(item => {
+
+            item.addEventListener(
+                "click",
+                () => {
+
+                    const target =
+                        item.dataset.view;
+
+
+                    navItems.forEach(
+                        nav => {
+
+                            nav.classList.remove(
+                                "active"
+                            );
+
+                        }
+                    );
+
+
+                    item.classList.add(
+                        "active"
+                    );
+
+
+                    views.forEach(
+                        view => {
+
+                            view.classList.remove(
+                                "active"
+                            );
+
+                        }
+                    );
+
+
+                    const targetView =
+                        document.getElementById(
+                            target + "View"
+                        );
+
+
+                    if (targetView) {
+
+                        targetView.classList.add(
+                            "active"
+                        );
+
+                    }
+
+                }
+            );
+
+        });
+
+
+        /* =========================================================
+           USER MENU
+        ========================================================= */
+
+        const userButton =
+            document.getElementById(
+                "userButton"
+            );
+
+        const userMenu =
+            document.getElementById(
+                "userMenu"
+            );
+
+
+        userButton.addEventListener(
+            "click",
+            function (event) {
+
+                event.stopPropagation();
+
+                userMenu.classList.toggle(
+                    "show"
+                );
+
+            }
+        );
+
+
+        document.addEventListener(
+            "click",
+            function () {
+
+                userMenu.classList.remove(
+                    "show"
+                );
+
+            }
+        );
+
+
+        /* =========================================================
+           LOGOUT
+        ========================================================= */
+
+        document.getElementById(
+            "logoutBtn"
+        ).addEventListener(
+            "click",
+            function () {
+
+                userMenu.classList.remove(
+                    "show"
+                );
+
+
+                dashboardApp.style.display =
+                    "none";
+
+
+                loginPage.style.display =
+                    "flex";
+
+
+                loginForm.reset();
+
+
+                showToast(
+                    "You have been logged out"
+                );
+
+            }
+        );
+
+
+        /* =========================================================
+           PROFILE
+        ========================================================= */
+
+        document.getElementById(
+            "profileBtn"
+        ).addEventListener(
+            "click",
+            function () {
+
+                userMenu.classList.remove(
+                    "show"
+                );
+
+
+                alert(
+                    "Analyst Profile\n\nRole: Security Analyst\nAccess: XAI Analytics"
+                );
+
+            }
+        );
+
+
+        /* =========================================================
+           SETTINGS
+        ========================================================= */
+
+        document.getElementById(
+            "settingsBtn"
+        ).addEventListener(
+            "click",
+            function () {
+
+                userMenu.classList.remove(
+                    "show"
+                );
+
+
+                alert(
+                    "Settings will be connected to the backend later."
+                );
+
+            }
+        );
+
+
+        /* =========================================================
+           TOP FILTERS
+        ========================================================= */
+
+        const datasetSelect =
+            document.getElementById(
+                "datasetSelect"
+            );
+
+        const modelSelect =
+            document.getElementById(
+                "modelSelect"
+            );
+
+        const attackSelect =
+            document.getElementById(
+                "attackSelect"
+            );
+
+
+        const modelValue =
+            document.getElementById(
+                "modelValue"
+            );
+
+        const attackValue =
+            document.getElementById(
+                "attackValue"
+            );
+
+
+        const datasetName =
+            document.getElementById(
+                "datasetName"
+            );
+
+        const modelName =
+            document.getElementById(
+                "modelName"
+            );
+
+
+        datasetSelect.addEventListener(
+            "change",
+            function () {
+
+                datasetName.textContent =
+                    this.value;
+
+                showToast(
+                    "Dataset changed to " +
+                    this.value
+                );
+
+            }
+        );
+
+
+        modelSelect.addEventListener(
+            "change",
+            function () {
+
+                modelValue.textContent =
+                    this.value;
+
+                modelName.textContent =
+                    this.value;
+
+                showToast(
+                    "Model changed to " +
+                    this.value
+                );
+
+            }
+        );
+
+
+        attackSelect.addEventListener(
+            "change",
+            function () {
+
+                attackValue.textContent =
+                    this.value;
+
+                showToast(
+                    "Attack type changed to " +
+                    this.value
+                );
+
+            }
+        );
+
+
+        /* =========================================================
+           FEATURE SELECTION
+        ========================================================= */
+
+        const featureRows =
+            document.querySelectorAll(
+                ".feature-row"
+            );
+
+
+        featureRows.forEach(row => {
+
+            row.addEventListener(
+                "click",
+                function () {
+
+                    featureRows.forEach(
+                        r => {
+
+                            r.classList.remove(
+                                "selected"
+                            );
+
+                        }
+                    );
+
+
+                    this.classList.add(
+                        "selected"
+                    );
+
+
+                    showToast(
+                        "Selected feature: " +
+                        this.dataset.feature
+                    );
+
+                }
+            );
+
+        });
+
+
+        /* =========================================================
+           JACCARD
+        ========================================================= */
+
+        /* =========================================================
+           SHARED ANALYSIS STATE
+        ========================================================= */
+
+        let currentJaccard = 53.85;
+        let currentRecommendation = "LIME";
+        let currentAnalysisStatus = "Ready";
+
+        function getCurrentDatasetName() {
+
+            const activeDataset =
+                document.getElementById("datasetName");
+
+            return activeDataset &&
+                activeDataset.textContent.trim()
+                ? activeDataset.textContent.trim()
+                : datasetSelect.value;
+        }
+
+
+        function updateReport() {
+
+            const report =
+                document.getElementById("reportText");
+
+            if (!report) {
+                return;
+            }
+
+            const dataset =
+                getCurrentDatasetName();
+
+            const model =
+                modelSelect.value || "XGBoost";
+
+            const attack =
+                attackSelect.value || "DDoS";
+
+            report.innerHTML = `
+                Dataset: ${dataset}<br>
+                Model: ${model}<br>
+                Attack Type: ${attack}<br>
+                Jaccard Similarity: ${currentJaccard.toFixed(2)}%<br>
+                Recommendation: ${currentRecommendation}<br>
+                Analysis Status: ${currentAnalysisStatus}
+            `;
+        }
+
+
+        function updateJaccard(value) {
+
+            const percentage =
+                Number(value);
+
+            currentJaccard =
+                Number.isFinite(percentage)
+                    ? percentage
+                    : 0;
+
+
+            document.getElementById(
+                "jaccardValue"
+            ).textContent =
+                percentage.toFixed(2) + "%";
+
+
+            document.getElementById(
+                "jaccardCircle"
+            ).textContent =
+                percentage.toFixed(2) + "%";
+
+
+            document.getElementById(
+                "reasonJaccard"
+            ).textContent =
+                percentage.toFixed(2) + "%";
+
+
+            const angle =
+                Math.min(
+                    Math.max(
+                        percentage,
+                        0
+                    ),
+                    100
+                ) * 3.6;
+
+
+            document.getElementById(
+                "agreementCircle"
+            ).style.background =
+
+                `conic-gradient(
+                    #10a874 0deg,
+                    #10a874 ${angle}deg,
+                    #e3eaf1 ${angle}deg,
+                    #e3eaf1 360deg
+                )`;
+
+        }
+
+
+        /* =========================================================
+           RUN ANALYSIS
+        ========================================================= */
+
+        async function runAnalysis() {
+
+            const button = document.getElementById("analyzeBtn");
+
+            button.disabled = true;
+            button.textContent = "Analyzing...";
+
+            try {
+
+                const formData = new FormData();
+
+                if (typeof selectedDatasetFile !== "undefined" && selectedDatasetFile) {
+                    formData.append("dataset", selectedDatasetFile);
+                }
+
+                formData.append("model", modelSelect.value);
+                formData.append("attack_type", attackSelect.value);
+
+                const response = await fetch(
+                    "http://127.0.0.1:5000/api/analyze",
+                    { method: "POST", body: formData }
+                );
+
+                const data = await response.json();
+
+                if (!response.ok || data.status === "error") {
+                    throw new Error(data.message || "Backend analysis failed.");
+                }
+
+                updateJaccard(
+                    Number(data.jaccard || 0)
+                );
+
+                currentRecommendation =
+                    data.recommendation || "—";
+
+                currentAnalysisStatus =
+                    "Completed";
+
+                document.getElementById(
+                    "recommendationValue"
+                ).textContent =
+                    currentRecommendation;
+
+                document.getElementById(
+                    "recommendationText"
+                ).textContent =
+                    data.reason ||
+                    (currentRecommendation + " Recommended");
+
+                updateReport();
+
+                showToast("XAI analysis completed");
+
+            } catch (error) {
+
+                console.error("Analysis error:", error);
+                showToast("Backend error: " + error.message);
+
+            } finally {
+
+                button.disabled = false;
+                button.textContent = "Run Analysis";
+
+            }
+
+        }
+
+
+        document.getElementById(
+            "analyzeBtn"
+        ).addEventListener(
+            "click",
+            runAnalysis
+        );
+
+
+        /* =========================================================
+           REFRESH
+        ========================================================= */
+
+        document.getElementById(
+            "refreshBtn"
+        ).addEventListener(
+            "click",
+            function () {
+
+                showToast(
+                    "Dashboard refreshed"
+                );
+
+            }
+        );
+
+
+        /* =========================================================
+           ANALYSIS PAGE
+        ========================================================= */
+
+        document.getElementById(
+            "analysisRunBtn"
+        ).addEventListener(
+            "click",
+            function () {
+
+                document.getElementById(
+                    "analysisStatus"
+                ).textContent =
+                    "Analysis completed successfully. SHAP and LIME results are ready.";
+
+
+                showToast(
+                    "Analysis completed"
+                );
+
+            }
+        );
+
+
+        /* =========================================================
+           REPORT
+        ========================================================= */
+
+        document.getElementById(
+            "reportBtn"
+        ).addEventListener(
+            "click",
+            function () {
+
+                updateReport();
+
+                showToast(
+                    "Report generated with latest analysis"
+                );
+
+            }
+        );
+
+
+
+
+        /* =========================================================
+           DATASET SELECT / UPLOAD
+        ========================================================= */
+
+        let selectedDatasetFile = null;
+
+        const dashboardDatasetSelect =
+            document.getElementById("dashboardDatasetSelect");
+
+        const useSelectedDatasetBtn =
+            document.getElementById("useSelectedDatasetBtn");
+
+        const datasetFileInput =
+            document.getElementById("datasetFileInput");
+
+        const uploadStatus =
+            document.getElementById("uploadStatus");
+
+        const selectedFileBox =
+            document.getElementById("selectedFileBox");
+
+        const selectedFileName =
+            document.getElementById("selectedFileName");
+
+        const removeFileBtn =
+            document.getElementById("removeFileBtn");
+
+        const datasetSelectStatus =
+            document.getElementById("datasetSelectStatus");
+
+
+        useSelectedDatasetBtn.addEventListener(
+            "click",
+            function () {
+
+                const selected =
+                    dashboardDatasetSelect.value;
+
+                selectedDatasetFile = null;
+                datasetFileInput.value = "";
+                selectedFileBox.classList.remove("show");
+
+                uploadStatus.textContent =
+                    "No custom dataset selected.";
+                uploadStatus.classList.remove("success");
+
+                datasetSelect.value = selected;
+                datasetName.textContent = selected;
+
+                datasetSelectStatus.textContent =
+                    "Current dataset: " + selected;
+                datasetSelectStatus.classList.add("success");
+
+                showToast(
+                    "Using dataset: " + selected
+                );
+            }
+        );
+
+
+        datasetFileInput.addEventListener(
+            "change",
+            function () {
+
+                const file = this.files[0];
+
+                if (!file) {
+                    return;
+                }
+
+                if (
+                    !file.name.toLowerCase().endsWith(".csv")
+                ) {
+
+                    showToast("Please select a CSV file.");
+
+                    this.value = "";
+                    selectedDatasetFile = null;
+                    selectedFileBox.classList.remove("show");
+
+                    return;
+                }
+
+                selectedDatasetFile = file;
+
+                selectedFileName.textContent =
+                    file.name;
+
+                selectedFileBox.classList.add("show");
+
+                uploadStatus.textContent =
+                    "CSV selected and ready for analysis.";
+
+                uploadStatus.classList.add("success");
+
+                let customOption =
+                    Array.from(datasetSelect.options).find(
+                        option =>
+                            option.value === "Custom Dataset"
+                    );
+
+                if (!customOption) {
+
+                    customOption =
+                        new Option(
+                            "Custom Dataset",
+                            "Custom Dataset"
+                        );
+
+                    datasetSelect.add(customOption);
+                }
+
+                datasetSelect.value = "Custom Dataset";
+                datasetName.textContent = file.name;
+
+                datasetSelectStatus.textContent =
+                    "Custom dataset selected: " + file.name;
+
+                datasetSelectStatus.classList.add("success");
+
+                showToast(
+                    "Dataset selected: " + file.name
+                );
+            }
+        );
+
+
+        removeFileBtn.addEventListener(
+            "click",
+            function () {
+
+                selectedDatasetFile = null;
+                datasetFileInput.value = "";
+
+                selectedFileName.textContent =
+                    "No file selected";
+
+                selectedFileBox.classList.remove("show");
+
+                uploadStatus.textContent =
+                    "No custom dataset selected.";
+
+                uploadStatus.classList.remove("success");
+
+                datasetSelect.value = "CICIoT2019";
+                dashboardDatasetSelect.value = "CICIoT2019";
+                datasetName.textContent = "CICIoT2019";
+
+                datasetSelectStatus.textContent =
+                    "Current dataset: CICIoT2019";
+
+                datasetSelectStatus.classList.remove("success");
+
+                showToast("Custom dataset removed");
+            }
+        );
+
+        /* =========================================================
+           INITIAL VALUE
+        ========================================================= */
+
+        updateJaccard(
+            currentJaccard
+        );
+
+        updateReport();
+
+
+    </script>
+
+</body>
+
+</html>
